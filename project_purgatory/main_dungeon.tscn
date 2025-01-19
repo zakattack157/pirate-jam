@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0vp1tkbtiduf"]
+
+[ext_resource type="PackedScene" uid="uid://b8b0ba6q8quch" path="res://RoomScenes/StartingRoom.tscn" id="1_08pxg"]
+[ext_resource type="PackedScene" uid="uid://djrxr3os0t5q" path="res://RoomScenes/Corridor.tscn" id="2_0y57u"]
+[ext_resource type="PackedScene" uid="uid://dgmunfcu40rfb" path="res://TestPlayer/player.tscn" id="3_08ulj"]
+
+[node name="MainDungeon" type="Node2D"]
+
+[node name="Starting Room" parent="." instance=ExtResource("1_08pxg")]
+
+[node name="Corridor" parent="." instance=ExtResource("2_0y57u")]
+position = Vector2(300, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_08ulj")]

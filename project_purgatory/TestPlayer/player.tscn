@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgmunfcu40rfb"]
+
+[ext_resource type="Texture2D" uid="uid://xy65vtyqy131" path="res://tileset/Legacy Collection/Legacy Collection/Assets/Characters/space-marine/Sprites/Idle/sprites/idle1.png" id="1_k304m"]
+[ext_resource type="Script" path="res://TestPlayer/PlayerMovement.gd" id="1_yb4en"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d120h"]
+size = Vector2(24, 17)
+
+[node name="Player" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_yb4en")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-1, 4.5)
+shape = SubResource("RectangleShape2D_d120h")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_k304m")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+zoom = Vector2(3, 3)
