@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bbrr470ll76iu"
+path="res://.godot/imported/player-death.wav-5ea467c4dbd3c3e36e9d2c16cbfb5aac.sample"
+
+[deps]
+
+source_file="res://tileset/Legacy Collection/Legacy Collection/Assets/Packs/Sewers pack files/Sounds/player-death.wav"
+dest_files=["res://.godot/imported/player-death.wav-5ea467c4dbd3c3e36e9d2c16cbfb5aac.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

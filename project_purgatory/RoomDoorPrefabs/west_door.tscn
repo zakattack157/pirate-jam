@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://lm5s6067et3g"]
+
+[ext_resource type="Script" path="res://RoomScripts/west_door.gd" id="1_1br06"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ka2w"]
+size = Vector2(32, 16)
+
+[node name="West Door" type="Node2D"]
+position = Vector2(-89, 4)
+rotation = 1.5708
+script = ExtResource("1_1br06")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_8ka2w")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
