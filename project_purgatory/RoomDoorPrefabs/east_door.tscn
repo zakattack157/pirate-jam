@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfsau6coa0tri"]
+
+[ext_resource type="Script" path="res://RoomScripts/east_door.gd" id="1_e3g7k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ka2w"]
+size = Vector2(32, 16)
+
+[node name="East Door" type="Node2D"]
+position = Vector2(87, 4)
+script = ExtResource("1_e3g7k")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_8ka2w")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
