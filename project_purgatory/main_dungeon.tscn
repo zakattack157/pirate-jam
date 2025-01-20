@@ -1,14 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0vp1tkbtiduf"]
+[gd_scene load_steps=6 format=3 uid="uid://c0vp1tkbtiduf"]
 
 [ext_resource type="PackedScene" uid="uid://b8b0ba6q8quch" path="res://RoomScenes/StartingRoom.tscn" id="1_08pxg"]
 [ext_resource type="PackedScene" uid="uid://djrxr3os0t5q" path="res://RoomScenes/Corridor.tscn" id="2_0y57u"]
-[ext_resource type="PackedScene" uid="uid://dgmunfcu40rfb" path="res://TestPlayer/player.tscn" id="3_08ulj"]
+[ext_resource type="PackedScene" uid="uid://cicl4kp3vswub" path="res://Scenes/player.tscn" id="3_bv3rk"]
+[ext_resource type="Texture2D" uid="uid://b1qt73843rsxq" path="res://Sprites/knife.png" id="4_s1e7u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5mbs2"]
+size = Vector2(16, 8)
 
 [node name="MainDungeon" type="Node2D"]
+texture_filter = 1
 
 [node name="Starting Room" parent="." instance=ExtResource("1_08pxg")]
 
 [node name="Corridor" parent="." instance=ExtResource("2_0y57u")]
 position = Vector2(220, 3)
 
-[node name="Player" parent="." instance=ExtResource("3_08ulj")]
+[node name="Player" parent="." instance=ExtResource("3_bv3rk")]
+
+[node name="Knife" type="StaticBody2D" parent="." groups=["possessable"]]
+position = Vector2(-57, -52)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Knife"]
+texture = ExtResource("4_s1e7u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Knife"]
+shape = SubResource("RectangleShape2D_5mbs2")
