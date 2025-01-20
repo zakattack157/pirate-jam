@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1fhiwp2v3wj4"]
+
+[ext_resource type="Texture2D" uid="uid://b1qt73843rsxq" path="res://Sprites/knife.png" id="1_hfdqy"]
+[ext_resource type="Material" uid="uid://4p35med54mek" path="res://Materials/possession_outline.tres" id="1_rvr67"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5mbs2"]
+size = Vector2(16, 8)
+
+[node name="Knife" type="StaticBody2D" groups=["possessable"]]
+texture_filter = 1
+position = Vector2(-57, -52)
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_rvr67")
+texture = ExtResource("1_hfdqy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5mbs2")

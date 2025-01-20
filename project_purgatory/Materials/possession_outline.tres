@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://4p35med54mek"]
+
+[ext_resource type="Shader" path="res://Shaders/possession_outline.gdshader" id="1_cmpix"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_cmpix")
+shader_parameter/width = 0
+shader_parameter/outline_color = Color(0.835667, 0.42, 1, 1)
+shader_parameter/flickering_speed = null
+shader_parameter/minimal_flickering_alpha = null

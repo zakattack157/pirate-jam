@@ -12,8 +12,9 @@ size = Vector2(16, 16)
 radius = 44.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+texture_filter = 1
 script = ExtResource("1_u6rfv")
-speed = 200
+speed = 90
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d120h")
