@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://pvf6ojm5utt7"]
+
+[ext_resource type="Script" path="res://Enemys/walk_enemy.gd" id="1_vppyh"]
+[ext_resource type="Texture2D" uid="uid://c0bf1exyhfuhe" path="res://icon.svg" id="2_shuxm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dhgx7"]
+size = Vector2(117, 120)
+
+[node name="WalkEnemy" type="CharacterBody2D"]
+script = ExtResource("1_vppyh")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_shuxm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_dhgx7")

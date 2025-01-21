@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgmunfcu40rfb"]
+[gd_scene load_steps=6 format=3 uid="uid://dgmunfcu40rfb"]
 
-[ext_resource type="Texture2D" uid="uid://xy65vtyqy131" path="res://tileset/Legacy Collection/Legacy Collection/Assets/Characters/space-marine/Sprites/Idle/sprites/idle1.png" id="1_k304m"]
 [ext_resource type="Script" path="res://TestPlayer/PlayerMovement.gd" id="1_yb4en"]
+[ext_resource type="Texture2D" uid="uid://bmiapib3ar3vt" path="res://Sprites/player.png" id="2_1woso"]
 [ext_resource type="Script" path="res://TestPlayer/camera_2d.gd" id="3_sg7rw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d120h"]
-size = Vector2(24, 17)
+[sub_resource type="CircleShape2D" id="CircleShape2D_3lxc5"]
+radius = 8.01561
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tqemm"]
+radius = 5.0
 
 [node name="Player" type="Node2D"]
 
@@ -14,12 +17,16 @@ script = ExtResource("1_yb4en")
 speed = 200
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(-1, 4.5)
-shape = SubResource("RectangleShape2D_d120h")
+shape = SubResource("CircleShape2D_3lxc5")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("1_k304m")
+texture = ExtResource("2_1woso")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 zoom = Vector2(4, 4)
 script = ExtResource("3_sg7rw")
+
+[node name="HurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_tqemm")
