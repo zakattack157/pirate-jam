@@ -10,3 +10,8 @@ func get_input():
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
+
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	if area.name == "HitBox":
+		print_debug(area.get_parent().name)
