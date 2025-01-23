@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgmunfcu40rfb"]
+[gd_scene load_steps=4 format=3 uid="uid://dgmunfcu40rfb"]
 
-[ext_resource type="Texture2D" uid="uid://xy65vtyqy131" path="res://tileset/Legacy Collection/Legacy Collection/Assets/Characters/space-marine/Sprites/Idle/sprites/idle1.png" id="1_k304m"]
 [ext_resource type="Script" path="res://TestPlayer/PlayerMovement.gd" id="1_yb4en"]
-[ext_resource type="Script" path="res://TestPlayer/camera_2d.gd" id="3_sg7rw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d120h"]
 size = Vector2(24, 17)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wb3q1"]
+load_path = "res://.godot/imported/idle1.png-60e1020fdce95f9efddaeaecae198595.ctex"
 
 [node name="Player" type="Node2D"]
 
@@ -18,8 +19,8 @@ position = Vector2(-1, 4.5)
 shape = SubResource("RectangleShape2D_d120h")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("1_k304m")
+texture = SubResource("CompressedTexture2D_wb3q1")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-zoom = Vector2(4, 4)
-script = ExtResource("3_sg7rw")
+enabled = false
+zoom = Vector2(3, 3)

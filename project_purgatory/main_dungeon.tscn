@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0vp1tkbtiduf"]
+[gd_scene load_steps=6 format=3 uid="uid://c0vp1tkbtiduf"]
 
 [ext_resource type="PackedScene" uid="uid://b8b0ba6q8quch" path="res://RoomScenes/StartingRoom.tscn" id="1_08pxg"]
 [ext_resource type="PackedScene" uid="uid://djrxr3os0t5q" path="res://RoomScenes/Corridor.tscn" id="2_0y57u"]
 [ext_resource type="PackedScene" uid="uid://dgmunfcu40rfb" path="res://TestPlayer/player.tscn" id="3_08ulj"]
+[ext_resource type="PackedScene" uid="uid://074rumleq4c2" path="res://RoomScenes/Ishape.tscn" id="4_snmcc"]
+[ext_resource type="PackedScene" uid="uid://kv3yin8najyj" path="res://RoomScenes/large_square_room.tscn" id="5_lvwi7"]
 
 [node name="MainDungeon" type="Node2D"]
 
@@ -12,3 +14,11 @@
 position = Vector2(220, 3)
 
 [node name="Player" parent="." instance=ExtResource("3_08ulj")]
+
+[node name="IshapeRoom" parent="." instance=ExtResource("4_snmcc")]
+show_behind_parent = true
+position = Vector2(-1, -204)
+
+[node name="LargeSquareRoom" parent="." instance=ExtResource("5_lvwi7")]
+show_behind_parent = true
+position = Vector2(-449, 51)
