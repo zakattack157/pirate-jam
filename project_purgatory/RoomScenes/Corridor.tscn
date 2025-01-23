@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://djrxr3os0t5q"]
+[gd_scene load_steps=9 format=4 uid="uid://djrxr3os0t5q"]
 
 [ext_resource type="Texture2D" uid="uid://bo2isgbupoa5h" path="res://tileset/Legacy Collection/Legacy Collection/Assets/Environments/top-down-dungeon-sci-fi/PNG/preview-top-down-sci-fi.png" id="1_kmlec"]
 [ext_resource type="PackedScene" uid="uid://dfsau6coa0tri" path="res://RoomDoorPrefabs/east_door.tscn" id="2_ek2kx"]
 [ext_resource type="PackedScene" uid="uid://ch3nlnbqcr8ku" path="res://RoomDoorPrefabs/north_door.tscn" id="3_xjgqd"]
 [ext_resource type="PackedScene" uid="uid://lm5s6067et3g" path="res://RoomDoorPrefabs/west_door.tscn" id="4_tb4jl"]
+[ext_resource type="Script" path="res://RoomScripts/FloorLogic/corridorfloor.gd" id="5_cswqh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wy882"]
 texture = ExtResource("1_kmlec")
@@ -82,6 +83,9 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_wy882")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_61jx6"]
+size = Vector2(156, 61)
+
 [node name="Corridor" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -97,3 +101,16 @@ position = Vector2(112, -40)
 
 [node name="West Door" parent="." instance=ExtResource("4_tb4jl")]
 position = Vector2(-24, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(65, 0)
+zoom = Vector2(5, 5)
+
+[node name="Floor" type="Area2D" parent="."]
+script = ExtResource("5_cswqh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(64, 0.5)
+shape = SubResource("RectangleShape2D_61jx6")
+
+[connection signal="body_entered" from="Floor" to="Floor" method="_on_body_entered"]

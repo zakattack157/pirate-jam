@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ch3nlnbqcr8ku"]
 
-[ext_resource type="Script" path="res://RoomScripts/north_door.gd" id="1_hm45f"]
+[ext_resource type="Script" path="res://RoomScripts/DoorLogic/north_door.gd" id="1_hm45f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ka2w"]
 size = Vector2(32, 16)
