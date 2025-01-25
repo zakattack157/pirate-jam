@@ -6,6 +6,8 @@ class_name FollowMovementC extends Node
 var start_position
 var target: Player
 
+@export var health = 3
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	start_position = parent.position
@@ -26,3 +28,6 @@ func _on_follow_area_body_entered(body):
 	if body is Player:
 		print("player has been entered")
 		target = body
+		health -= 1
+		if health < 1:
+			$"..".queue_free()

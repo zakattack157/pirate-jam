@@ -10,25 +10,25 @@ radius = 8.01561
 [sub_resource type="CircleShape2D" id="CircleShape2D_tqemm"]
 radius = 7.0
 
-[node name="Player" type="Node2D"]
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Player"]]
+[node name="Player1" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_yb4en")
 speed = 200
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3lxc5")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_1woso")
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 script = ExtResource("3_sg7rw")
 
-[node name="HurtBox" type="Area2D" parent="CharacterBody2D"]
+[node name="HurtBox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_tqemm")
 
-[connection signal="area_entered" from="CharacterBody2D/HurtBox" to="CharacterBody2D" method="_on_hurt_box_area_entered"]
+[node name="Player" type="Node2D" parent="." groups=["Player"]]
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
