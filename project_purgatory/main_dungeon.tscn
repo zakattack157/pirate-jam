@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0vp1tkbtiduf"]
+[gd_scene load_steps=8 format=3 uid="uid://c0vp1tkbtiduf"]
 
 [ext_resource type="PackedScene" uid="uid://b8b0ba6q8quch" path="res://RoomScenes/StartingRoom.tscn" id="1_08pxg"]
 [ext_resource type="Script" path="res://main_dungeon.gd" id="1_74rdk"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dgmunfcu40rfb" path="res://TestPlayer/player.tscn" id="3_08ulj"]
 [ext_resource type="PackedScene" uid="uid://cevedqg0khtvj" path="res://Enemys/follow_enemy.tscn" id="4_pw0j2"]
 [ext_resource type="PackedScene" uid="uid://c4khsl1ly3ujr" path="res://hearts_container.tscn" id="5_37eo1"]
+[ext_resource type="PackedScene" uid="uid://d086boa3kevwl" path="res://Enemys/walk_enemy.tscn" id="7_tjbjb"]
 
 [node name="MainDungeon" type="Node2D"]
 script = ExtResource("1_74rdk")
@@ -24,3 +25,6 @@ layer = 0
 [node name="heartsContainer" parent="CanvasLayer" instance=ExtResource("5_37eo1")]
 
 [node name="Player1" parent="." instance=ExtResource("3_08ulj")]
+
+[node name="WalkEnemy" parent="." instance=ExtResource("7_tjbjb")]
+position = Vector2(-62, 36)

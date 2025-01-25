@@ -24,9 +24,9 @@ func _physics_process(delta: float) -> void:
 	parent.move_and_slide()
 	
 func _on_follow_area_body_entered(body):
-	print("body entered")
+	#print("body entered")
 	if body is Player:
-		print("player has been entered")
+		#print("player has been entered")
 		target = body
 		health -= 1
 		if health < 1:

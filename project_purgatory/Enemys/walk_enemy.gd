@@ -2,7 +2,9 @@ class_name WalkEnemy extends CharacterBody2D
 #make these like a small flying little guy
 @export var speed = 40
 @export var limit = 0.5
+@export var health = 3
 
+var target: Player
 var start_position
 var end_position
 
@@ -23,3 +25,11 @@ func update_velocity():
 func _physics_process(delta) -> void:
 	update_velocity()
 	move_and_slide()
+
+
+func _on_hurt_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		target = body
+		health -= 1
+		if health < 1:
+			$"..".queue_free()
