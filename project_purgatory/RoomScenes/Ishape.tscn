@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=4 uid="uid://074rumleq4c2"]
 
 [ext_resource type="Texture2D" uid="uid://bo2isgbupoa5h" path="res://tileset/Legacy Collection/Legacy Collection/Assets/Environments/top-down-dungeon-sci-fi/PNG/preview-top-down-sci-fi.png" id="1_8207t"]
-[ext_resource type="PackedScene" uid="uid://dfsau6coa0tri" path="res://RoomDoorPrefabs/east_door.tscn" id="2_enw57"]
 [ext_resource type="PackedScene" uid="uid://ch3nlnbqcr8ku" path="res://RoomDoorPrefabs/north_door.tscn" id="3_m75a6"]
 [ext_resource type="PackedScene" uid="uid://cbr0ryegwaf31" path="res://RoomDoorPrefabs/south_door.tscn" id="4_nou6e"]
 [ext_resource type="Script" path="res://RoomScripts/FloorLogic/Ifloor.gd" id="5_6w3pc"]
+[ext_resource type="PackedScene" uid="uid://lm5s6067et3g" path="res://RoomDoorPrefabs/west_door.tscn" id="5_y7bay"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m53q7"]
 texture = ExtResource("1_8207t")
@@ -91,9 +91,6 @@ tile_map_data = PackedByteArray("AAD//wAAAAAHAAcAAAAAAAAAAAAHAAcAAAACAAAAAAAHAAc
 tile_set = SubResource("TileSet_dn80q")
 collision_visibility_mode = 1
 
-[node name="East Door" parent="." instance=ExtResource("2_enw57")]
-position = Vector2(-88, -159)
-
 [node name="North Door" parent="." instance=ExtResource("3_m75a6")]
 position = Vector2(0, -200)
 
@@ -109,5 +106,8 @@ script = ExtResource("5_6w3pc")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Floor"]
 polygon = PackedVector2Array(-78, -46, -29, -46, -29, -131, -78, -131, -78, -190, 78, -190, 78, -130, 30, -130, 30, -45, 78, -45, 78, 14, -78, 14)
+
+[node name="West Door" parent="." instance=ExtResource("5_y7bay")]
+position = Vector2(-87, -159)
 
 [connection signal="body_entered" from="Floor" to="Floor" method="_on_body_entered"]
