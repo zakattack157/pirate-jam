@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://d086boa3kevwl"]
+
+[ext_resource type="Script" path="res://Enemys/walk_enemy.gd" id="1_vppyh"]
+[ext_resource type="Texture2D" uid="uid://clqgre22litv3" path="res://Sprites/enemy.png" id="2_goscr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i6j0m"]
+radius = 5.59017
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ydrh"]
+radius = 6.0
+
+[node name="WalkEnemy" type="CharacterBody2D" groups=["Enemy1"]]
+script = ExtResource("1_vppyh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_goscr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_i6j0m")
+
+[node name="HurtArea" type="Area2D" parent="." groups=["Enemy1"]]
+position = Vector2(0.5, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
+position = Vector2(-1.5, 0)
+shape = SubResource("CircleShape2D_3ydrh")
+
+[connection signal="body_entered" from="HurtArea" to="." method="_on_hurt_area_body_entered"]
