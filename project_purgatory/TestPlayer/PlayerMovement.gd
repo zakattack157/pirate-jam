@@ -7,6 +7,7 @@ var can_move: bool = true # True, player can move. False, player does not move
 
 func _ready():
 	anim.play("Idle")
+	
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
