@@ -1,9 +1,13 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
+signal healthChanged
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
 @export var speed = 400
 var can_move: bool = true # True, player can move. False, player does not move
+@export var max_health = 3
+@onready var current_health: int = max_health
+
 
 func _ready():
 	anim.play("Idle")
@@ -31,3 +35,10 @@ func _physics_process(delta):
 		return
 	get_input()
 	move_and_slide()
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemy1"):
+		current_health -= 1
+		if current_health < 0:
+			get_tree().reload_current_scene()
+		healthChanged.emit(current_health)

@@ -1,10 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://dgmunfcu40rfb"]
+[gd_scene load_steps=30 format=3 uid="uid://dgmunfcu40rfb"]
 
 [ext_resource type="Script" path="res://TestPlayer/PlayerMovement.gd" id="1_yb4en"]
 [ext_resource type="Texture2D" uid="uid://b2oteu4xb3lje" path="res://RealPlayer/player_movement_sheet.png" id="2_8v0ep"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d120h"]
-size = Vector2(15, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_wlb2q"]
+radius = 6.5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rony6"]
 atlas = ExtResource("2_8v0ep")
@@ -197,7 +197,10 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="Player" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_qxurq"]
+radius = 6.0
+
+[node name="Player" type="Node2D" groups=["Player"]]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["Player"]]
 top_level = true
@@ -206,7 +209,7 @@ speed = 200
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_d120h")
+shape = SubResource("CircleShape2D_wlb2q")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 
@@ -214,3 +217,11 @@ shape = SubResource("RectangleShape2D_d120h")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_7tl8p")
 animation = &"Walk_Left"
+
+[node name="HurtBox" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/HurtBox"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_qxurq")
+
+[connection signal="area_entered" from="CharacterBody2D/HurtBox" to="CharacterBody2D" method="_on_hurt_box_area_entered"]
