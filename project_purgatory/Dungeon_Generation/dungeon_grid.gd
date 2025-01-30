@@ -26,7 +26,7 @@ func _ready() -> void:
 	
 	var dungeon_grid = create_2d_array(rows,cols, 0)
 			
-	bfs(dungeon_grid, start_row, start_col)
+	dfs(dungeon_grid, start_row, start_col)
 
 
 
@@ -38,7 +38,8 @@ func create_2d_array(rows: int, cols: int, default_value = 0) -> Array:
 			array_2d[i].append(default_value)
 	return array_2d
 
-func bfs(grid: Array, start_row: int, start_col: int):
+#depth first search for dungeon generation
+func dfs(grid: Array, start_row: int, start_col: int):
 	var directions = [
 		Vector2(-1, 0), #UP
 		Vector2(1, 0),  #DOWN
@@ -46,20 +47,25 @@ func bfs(grid: Array, start_row: int, start_col: int):
 		Vector2(0,1),   #RIGHT
 	]
 	
-	#BFS Queue
-	var queue = []
-	queue.append(Vector2(start_row,start_col))
+	#DFS Stack
+	var stack = []
+	stack.append(Vector2(start_row,start_col))
 
 	var visited = create_2d_array(len(grid), len(grid[0]), false)
 	visited[start_row][start_col] = true
+	
+	var rooms_placed = 1
+	add_room(start_row, start_col)
 	#start BFS
-	while queue.size() > 0:
-		var current = queue.pop_front()
+	while stack.size() > 0 and rooms_placed < 10:
+		var current = stack[-1] #peeks top of stack
 		var row = current.x
 		var col = current.y
 		
-		#print("visiting cell: (", row, ",", col, ")")
-		add_room(row, col)
+		directions.shuffle()
+		
+		
+		var found_next_room = false
 		
 		for direction in directions:
 			var new_row = row + direction.x
@@ -68,7 +74,15 @@ func bfs(grid: Array, start_row: int, start_col: int):
 			#check bounds and if cell is already visited
 			if is_in_bounds(grid, new_row, new_col) and not visited[new_row][new_col]:
 				visited[new_row][new_col] = true
-				queue.append(Vector2(new_row, new_col))
+				stack.append(Vector2(new_row, new_col))
+				
+				add_room(new_row, new_col)
+				rooms_placed += 1
+				found_next_room = true
+				break
+				
+		if not found_next_room:
+			stack.pop_back()
 				
 func is_in_bounds(grid: Array, row: int, col: int) -> bool:
 	return row >= 0 and row < len(grid) and col >= 0 and col < len(grid[0])
