@@ -9,7 +9,7 @@ const ROOM_PATH = "res://RoomScenes/StartingRoom.tscn"
 const PLAYER_PATH = "res://TestPlayer/player.tscn"
 var room_scene = preload(ROOM_PATH) as PackedScene
 
-
+var num_rooms = 5 
 
 #Room size
 var room_width = 288
@@ -42,24 +42,21 @@ func create_2d_array(rows: int, cols: int, default_value = 0) -> Array:
 #depth first search for dungeon generation
 func dfs(grid: Array, start_row: int, start_col: int)->Array:
 	var directions = [
-		Vector2(-1, 0), #UP
-		Vector2(1, 0),  #DOWN
-		Vector2(0, -1), #LEFT
-		Vector2(0,1),   #RIGHT
+		Vector2(-2, 0), #UP
+		Vector2(2, 0),  #DOWN
+		Vector2(0, -2), #LEFT
+		Vector2(0,2),   #RIGHT
 	]
 	
 	#DFS Stack
 	var stack = []
 	stack.append(Vector2(start_row,start_col))
 
-	var visited = create_2d_array(len(grid), len(grid[0]), false)
-	visited[start_row][start_col] = true
-	
 	#static room placed at center of grid
 	var rooms_placed = 1
 	grid[start_row][start_col] = 1
 	#start BFS
-	while stack.size() > 0 and rooms_placed < 10:
+	while stack.size() > 0 and rooms_placed < num_rooms:
 		var current = stack[-1] #peeks top of stack
 		var row = current.x
 		var col = current.y
@@ -73,10 +70,20 @@ func dfs(grid: Array, start_row: int, start_col: int)->Array:
 			
 			#check bounds and if cell is already visited
 			if is_in_bounds(grid, new_row, new_col) and grid[new_row][new_col] == 0:
+				var mid_row = (row + new_row) / 2
+				var mid_col = (col + new_col) / 2
+				grid[mid_row][mid_col] = 1
 				grid[new_row][new_col] = 1
 				stack.append(Vector2(new_row, new_col))
 				rooms_placed += 1
 				found_next_room = true
+				
+				if randf() < 0.4 and rooms_placed < (num_rooms / 2):
+					new_branch(grid, new_row, new_col)
+				
+				if randf() < 0.55:
+					add_side_room(grid, new_row, new_col)
+					
 				break
 				
 		if not found_next_room:
@@ -140,3 +147,43 @@ func get_room_scenes(doors: String)-> PackedScene:
 		"DLR": return preload("res://RoomScenes/RoomDLR.tscn")
 		"UDLR": return preload("res://RoomScenes/RoomUDLR.tscn")
 		_: return preload("res://RoomScenes/StartingRoom.tscn")
+
+func add_side_room(grid: Array, row: int, col: int):
+	var side_directions = [
+		Vector2(-1,0),
+		Vector2(1,0),
+		Vector2(0, -1),
+		Vector2(-1, 0),
+	]
+	
+	side_directions.shuffle()
+	
+	for side in side_directions:
+		var side_row = row + side.x
+		var side_col = col + side.y
+		
+		if is_in_bounds(grid, side_row, side_col) and grid[side_row][side_col] == 0:
+			grid[side_row][side_col] = 1
+			return
+
+func new_branch(grid: Array, row: int, col: int):
+	var branch_directions = [
+		Vector2(-2, 0),
+		Vector2(2, 0),
+		Vector2(0, -2),
+		Vector2(0, 2),
+	]
+	
+	branch_directions.shuffle()
+	
+	for direction in branch_directions:
+		var new_row = row + direction.x
+		var new_col = col + direction.y
+		
+		if is_in_bounds(grid, new_row, new_col) and grid[new_row][new_col] == 0:
+			var mid_row = (row + new_row) / 2
+			var mid_col = (col + new_col) / 2
+			grid[mid_row][mid_col] = 1
+			
+			grid[new_row][mid_col] = 1
+			return
