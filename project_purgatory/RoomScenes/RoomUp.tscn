@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://u36psatbuh0l"]
+[gd_scene load_steps=10 format=4 uid="uid://u36psatbuh0l"]
 
+[ext_resource type="Script" path="res://main_dungeon.gd" id="1_n3oja"]
 [ext_resource type="Texture2D" uid="uid://bo2isgbupoa5h" path="res://tileset/Legacy Collection/Legacy Collection/Assets/Environments/top-down-dungeon-sci-fi/PNG/preview-top-down-sci-fi.png" id="1_niq2i"]
+[ext_resource type="PackedScene" uid="uid://cevedqg0khtvj" path="res://Enemys/follow_enemy.tscn" id="2_ymv8t"]
 [ext_resource type="PackedScene" uid="uid://ch3nlnbqcr8ku" path="res://RoomDoorPrefabs/north_door.tscn" id="2_yy37d"]
+[ext_resource type="PackedScene" uid="uid://5ig4k4vu5hwr" path="res://enemypath.tscn" id="4_dqjpp"]
+[ext_resource type="PackedScene" uid="uid://c4khsl1ly3ujr" path="res://TestPlayer/health/hearts_container.tscn" id="5_eyxkr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4mhx"]
 texture = ExtResource("1_niq2i")
@@ -102,6 +106,8 @@ sources/0 = SubResource("TileSetAtlasSource_r4mhx")
 size = Vector2(158, 126)
 
 [node name="Starting Room" type="Node2D"]
+script = ExtResource("1_n3oja")
+enemy_follow_scene = ExtResource("2_ymv8t")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 show_behind_parent = true
@@ -122,5 +128,11 @@ zoom = Vector2(5.332, 4)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2(-1, 4)
 shape = SubResource("RectangleShape2D_e55xs")
+
+[node name="EnemyPath" parent="." instance=ExtResource("4_dqjpp")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="heartsContainer" parent="CanvasLayer" instance=ExtResource("5_eyxkr")]
 
 [connection signal="body_entered" from="Floor" to="Floor" method="_on_body_entered"]

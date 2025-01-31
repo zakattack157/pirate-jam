@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=4 uid="uid://cq1awisgw3g23"]
+[gd_scene load_steps=11 format=4 uid="uid://cq1awisgw3g23"]
 
 [ext_resource type="Texture2D" uid="uid://bo2isgbupoa5h" path="res://tileset/Legacy Collection/Legacy Collection/Assets/Environments/top-down-dungeon-sci-fi/PNG/preview-top-down-sci-fi.png" id="1_040ul"]
+[ext_resource type="Script" path="res://main_dungeon.gd" id="1_lnuuo"]
+[ext_resource type="PackedScene" uid="uid://cevedqg0khtvj" path="res://Enemys/follow_enemy.tscn" id="2_uscpt"]
 [ext_resource type="PackedScene" uid="uid://ch3nlnbqcr8ku" path="res://RoomDoorPrefabs/north_door.tscn" id="3_6awle"]
 [ext_resource type="PackedScene" uid="uid://dfsau6coa0tri" path="res://RoomDoorPrefabs/east_door.tscn" id="3_tjtwc"]
+[ext_resource type="PackedScene" uid="uid://5ig4k4vu5hwr" path="res://enemypath.tscn" id="5_jm616"]
+[ext_resource type="PackedScene" uid="uid://c4khsl1ly3ujr" path="res://TestPlayer/health/hearts_container.tscn" id="6_ufkgf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4mhx"]
 texture = ExtResource("1_040ul")
@@ -103,6 +107,8 @@ sources/0 = SubResource("TileSetAtlasSource_r4mhx")
 size = Vector2(158, 126)
 
 [node name="Starting Room" type="Node2D"]
+script = ExtResource("1_lnuuo")
+enemy_follow_scene = ExtResource("2_uscpt")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 show_behind_parent = true
@@ -125,5 +131,11 @@ shape = SubResource("RectangleShape2D_e55xs")
 [node name="North Door" parent="." instance=ExtResource("3_6awle")]
 
 [node name="East Door" parent="." instance=ExtResource("3_tjtwc")]
+
+[node name="EnemyPath" parent="." instance=ExtResource("5_jm616")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="heartsContainer" parent="CanvasLayer" instance=ExtResource("6_ufkgf")]
 
 [connection signal="body_entered" from="Floor" to="Floor" method="_on_body_entered"]

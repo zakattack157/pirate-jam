@@ -216,7 +216,7 @@ shape = SubResource("CircleShape2D_wlb2q")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_7tl8p")
-animation = &"Walk_Left"
+animation = &"Idle"
 
 [node name="HurtBox" type="Area2D" parent="CharacterBody2D"]
 

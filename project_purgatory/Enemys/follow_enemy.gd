@@ -26,6 +26,10 @@ func _physics_process(delta: float) -> void:
 func _on_follow_area_body_entered(body):
 	if body is Player:
 		target = body
-		health -= 1
-		if health < 1:
-			$"..".queue_free()
+		
+
+func _on_hit_box_body_entered(body: Node2D) -> void:
+		if body is Player:
+			health -= 1
+			if health < 1:
+				$"..".queue_free()

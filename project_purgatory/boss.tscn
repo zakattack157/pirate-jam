@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://c3fhnvqvd72il"]
+
+[ext_resource type="Script" path="res://boss.gd" id="1_57ftr"]
+[ext_resource type="Texture2D" uid="uid://chkw820en0e02" path="res://Sprites/bib_angel_sheet.png" id="1_b8m36"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ptair"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tagb0"]
+atlas = ExtResource("1_b8m36")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muph0"]
+atlas = ExtResource("1_b8m36")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pinq2"]
+atlas = ExtResource("1_b8m36")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjuo4"]
+atlas = ExtResource("1_b8m36")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ti52v"]
+atlas = ExtResource("1_b8m36")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2i3q"]
+atlas = ExtResource("1_b8m36")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q51ni"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tagb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_muph0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pinq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjuo4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ti52v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2i3q")
+}],
+"loop": true,
+"name": &"boss_anim",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nnvtq"]
+
+[node name="Boss" type="Node2D"]
+metadata/_edit_lock_ = true
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_57ftr")
+
+[node name="ShootTimer" type="Timer" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_ptair")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_q51ni")
+animation = &"boss_anim"
+
+[node name="HitBox" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/HitBox"]
+shape = SubResource("CircleShape2D_nnvtq")
+
+[connection signal="timeout" from="CharacterBody2D/ShootTimer" to="CharacterBody2D" method="_on_shoot_timer_timeout"]
+[connection signal="body_entered" from="CharacterBody2D/HitBox" to="CharacterBody2D" method="_on_hit_box_body_entered"]
