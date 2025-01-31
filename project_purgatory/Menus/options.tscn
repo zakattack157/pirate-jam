@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=3 uid="uid://c772mxrsk7ott"]
+
+[ext_resource type="Script" path="res://MenuScripts/options.gd" id="1_4lftv"]
+[ext_resource type="Script" path="res://VolumeSliders/main_volume.gd" id="1_o0r0q"]
+[ext_resource type="Script" path="res://VolumeSliders/music_volume.gd" id="2_o28l5"]
+[ext_resource type="Script" path="res://VolumeSliders/sfx_volume.gd" id="3_52omg"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_4lftv")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.713726, 0.717647, 0.72549, 1)
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 128.0
+grow_horizontal = 2
+text = "Options
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -392.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Label4" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Sound Options:
+
+"
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="MainVolume" type="HSlider" parent="Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("1_o0r0q")
+bus_name = "Master"
+
+[node name="Label2" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicVolume" type="HSlider" parent="Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("2_o28l5")
+bus_name = "Music"
+
+[node name="Label3" type="Label" parent="Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SFXVolume" type="HSlider" parent="Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("3_52omg")
+bus_name = "sfx"
+
+[node name="BackToMainMenu" type="Button" parent="Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Save and Return"
+
+[connection signal="pressed" from="Control/HBoxContainer/VBoxContainer/BackToMainMenu" to="." method="_on_back_to_main_menu_pressed"]
