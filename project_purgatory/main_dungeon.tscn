@@ -1,47 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0vp1tkbtiduf"]
+[gd_scene load_steps=4 format=3 uid="uid://c0vp1tkbtiduf"]
 
-[ext_resource type="PackedScene" uid="uid://b8b0ba6q8quch" path="res://RoomScenes/StartingRoom.tscn" id="1_08pxg"]
-[ext_resource type="Script" path="res://main_dungeon.gd" id="1_86hde"]
-[ext_resource type="PackedScene" uid="uid://djrxr3os0t5q" path="res://RoomScenes/Corridor.tscn" id="2_0y57u"]
-[ext_resource type="PackedScene" uid="uid://d086boa3kevwl" path="res://Enemys/walk_enemy.tscn" id="2_cjvro"]
+[ext_resource type="Script" path="res://Dungeon_Generation/dungeon_grid.gd" id="1_skicb"]
 [ext_resource type="PackedScene" uid="uid://dgmunfcu40rfb" path="res://TestPlayer/player.tscn" id="3_08ulj"]
-[ext_resource type="PackedScene" uid="uid://074rumleq4c2" path="res://RoomScenes/Ishape.tscn" id="4_snmcc"]
-[ext_resource type="PackedScene" uid="uid://kv3yin8najyj" path="res://RoomScenes/large_square_room.tscn" id="5_lvwi7"]
-[ext_resource type="PackedScene" uid="uid://cevedqg0khtvj" path="res://Enemys/follow_enemy.tscn" id="6_65oum"]
 [ext_resource type="PackedScene" uid="uid://c4khsl1ly3ujr" path="res://TestPlayer/health/hearts_container.tscn" id="8_y276v"]
 
-[sub_resource type="Curve2D" id="Curve2D_7dqrj"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -80, -56, 0, 0, 0, 0, 80, -56, 0, 0, 0, 0, 80, 64, 0, 0, 0, 0, -80, 64, 0, 0, 0, 0, -80, -56)
-}
-point_count = 5
-
 [node name="MainDungeon" type="Node2D"]
-script = ExtResource("1_86hde")
-enemy_follow_scene = ExtResource("6_65oum")
-enemy_walk_scene = ExtResource("2_cjvro")
-
-[node name="Starting Room" parent="." instance=ExtResource("1_08pxg")]
-
-[node name="Corridor" parent="." instance=ExtResource("2_0y57u")]
-position = Vector2(220, 3)
+script = ExtResource("1_skicb")
 
 [node name="Player" parent="." instance=ExtResource("3_08ulj")]
-
-[node name="IshapeRoom" parent="." instance=ExtResource("4_snmcc")]
-show_behind_parent = true
-position = Vector2(-1, -204)
-
-[node name="LargeSquareRoom" parent="." instance=ExtResource("5_lvwi7")]
-show_behind_parent = true
-position = Vector2(-449, 51)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="heartsContainer" parent="CanvasLayer" instance=ExtResource("8_y276v")]
-
-[node name="EnemyPath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_7dqrj")
-
-[node name="EnemySpawnLocation" type="PathFollow2D" parent="EnemyPath"]
-position = Vector2(-80, -56)

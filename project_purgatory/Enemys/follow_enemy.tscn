@@ -41,3 +41,4 @@ shape = SubResource("CircleShape2D_alprk")
 shape = SubResource("CircleShape2D_ojkup")
 
 [connection signal="body_entered" from="Follow Area" to="FollowMovementC" method="_on_follow_area_body_entered"]
+[connection signal="body_entered" from="HitBox" to="FollowMovementC" method="_on_hit_box_body_entered"]

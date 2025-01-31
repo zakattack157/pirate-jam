@@ -20,6 +20,10 @@ var room_height = 255
 var start_row = 4
 var start_col = 3
 
+#player hearts
+@onready var player = $Player/CharacterBody2D
+@onready var hearts_container = $CanvasLayer/heartsContainer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
@@ -29,7 +33,12 @@ func _ready() -> void:
 	dungeon_grid = dfs(dungeon_grid, start_row, start_col)
 	#places rooms with info from the dfs
 	place_rooms_in_grid(dungeon_grid)
+	update_hearts()
 
+func update_hearts() -> void:
+	hearts_container.setMaxHearts(player.max_health)
+	hearts_container.updateHearts(player.current_health)
+	player.healthChanged.connect(hearts_container.updateHearts)
 
 func create_2d_array(rows: int, cols: int, default_value = 0) -> Array:
 	var array_2d = []
